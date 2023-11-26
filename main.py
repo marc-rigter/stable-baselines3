@@ -5,6 +5,7 @@ from stable_baselines3 import A2C
 import numpy as np
 import argparse
 import wandb
+import torch
 
 def evaluate(
     model,
@@ -41,6 +42,8 @@ def evaluate(
 
 def train(args):
     total_steps = args.env_steps
+    torch.manual_seed(args.seed)
+    np.random.seed(args.seed)
     env = make_vec_env(args.env_name, n_envs=1)
     if args.algo == 'ppo':
         from stable_baselines3 import PPO
@@ -64,6 +67,8 @@ if __name__ == "__main__":
         '--group', default='default')
     parser.add_argument(
         '--env_steps', type=int, default=1000000)
+    parser.add_argument(
+        '--seed', type=int, default=0)
     parser.add_argument(
         '--algo', default='ppo')
     parser.add_argument(
