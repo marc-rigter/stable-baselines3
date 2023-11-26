@@ -53,7 +53,7 @@ def train(args):
         model = A2C("MlpPolicy", env, verbose=1)
     epoch_length = 10000
 
-    wandb.init(project="polygrad_results", group=args.group)
+    wandb.init(entity="a2i", project="polygrad_results", group=args.group)
     for i in range(total_steps // epoch_length):
         model.learn(total_timesteps=epoch_length)
         mean_reward = evaluate(model, num_episodes=10, deterministic=True)

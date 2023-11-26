@@ -21,6 +21,7 @@ git_rewrite_commit_history.sh
 /dist/
 /build
 keys/
+wandb/
 
 # Virtualenv
 /env
