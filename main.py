@@ -50,7 +50,7 @@ def train(args):
         model = PPO("MlpPolicy", env, verbose=1)
     elif args.algo == 'a2c':
         from stable_baselines3 import A2C
-        model = A2C("MlpPolicy", env, verbose=1)
+        model = A2C("MlpPolicy", env, verbose=1, learning_rate=0.0003, ent_coef=1e-5)
     epoch_length = 10000
 
     wandb.init(entity="a2i", project="polygrad_results", group=args.group)
