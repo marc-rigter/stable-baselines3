@@ -2,6 +2,7 @@ import gym
 
 from stable_baselines3.common.env_util import make_vec_env
 from stable_baselines3 import A2C
+from sb3_contrib import TRPO
 import numpy as np
 import argparse
 import wandb
@@ -51,6 +52,9 @@ def train(args):
     elif args.algo == 'a2c':
         from stable_baselines3 import A2C
         model = A2C("MlpPolicy", env, verbose=1, learning_rate=0.0003, ent_coef=1e-5)
+    elif args.algo == 'trpo':
+        from stable_baselines3 import TRPO
+        model = TRPO("MlpPolicy", env, verbose=1)
     epoch_length = 10000
 
     wandb.init(entity="a2i", project="polygrad_results", group=args.group)
